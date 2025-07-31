@@ -9,11 +9,12 @@ export async function POST(req) {
     const headerPayload = await headers()
     const svixHeaders = {
             "svix-id": headerPayload.get("svix-id"),
+            "svix-timestamp": headerPayload.get("svix-timestamp"),
             "svix-signature": headerPayload.get("svix-signature")
         }
         // get the payload and verify it
     const payload = await req.json()
-    const body = JSON.stringify()
+    const body = JSON.stringify(payload)
     const { data, type } = wh.verify(body, svixHeaders)
         // prepare the user data to be saved inthe database 
 
